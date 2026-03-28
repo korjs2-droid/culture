@@ -2060,6 +2060,11 @@ def find_cjk_font(countries: list[str] | None = None) -> str | None:
 
     if has_jp and not has_kr:
         candidates = [
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+            "/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc",
+            "/usr/share/fonts/truetype/noto/NotoSansCJKjp-Regular.otf",
+            "/usr/share/fonts/truetype/noto/NotoSansJP-Regular.otf",
             "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc",
             "/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc",
             "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
@@ -2068,6 +2073,11 @@ def find_cjk_font(countries: list[str] | None = None) -> str | None:
         ]
     elif has_kr and not has_jp:
         candidates = [
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+            "/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc",
+            "/usr/share/fonts/truetype/noto/NotoSansCJKkr-Regular.otf",
+            "/usr/share/fonts/truetype/noto/NotoSansKR-Regular.otf",
             "/System/Library/Fonts/AppleSDGothicNeo.ttc",
             "/System/Library/Fonts/Supplemental/AppleGothic.ttf",
             "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
@@ -2076,6 +2086,12 @@ def find_cjk_font(countries: list[str] | None = None) -> str | None:
         ]
     else:
         candidates = [
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+            "/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc",
+            "/usr/share/fonts/truetype/noto/NotoSansCJKkr-Regular.otf",
+            "/usr/share/fonts/truetype/noto/NotoSansCJKjp-Regular.otf",
+            str(Path(__file__).resolve().parent / "assets" / "fonts" / "NotoSansCJK-Regular.ttc"),
             "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
             "/Library/Fonts/Arial Unicode.ttf",
             "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc",
