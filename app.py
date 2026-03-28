@@ -5,6 +5,7 @@ import os
 import re
 from collections import Counter
 from functools import lru_cache
+from matplotlib import font_manager
 from pathlib import Path
 from typing import Iterable, NamedTuple
 
@@ -2100,6 +2101,51 @@ def find_cjk_font(countries: list[str] | None = None) -> str | None:
         ]
     for path in candidates:
         if Path(path).exists():
+            return path
+
+    system_fonts = font_manager.findSystemFonts(fontpaths=None, fontext="ttf")
+    system_fonts += font_manager.findSystemFonts(fontpaths=None, fontext="ttc")
+    system_fonts += font_manager.findSystemFonts(fontpaths=None, fontext="otf")
+    seen: set[str] = set()
+    deduped_fonts: list[str] = []
+    for path in system_fonts:
+        if path not in seen:
+            seen.add(path)
+            deduped_fonts.append(path)
+
+    if has_jp and not has_kr:
+        keywords = [
+            "notosanscjk",
+            "notoserifcjk",
+            "notosansjp",
+            "hiragino",
+            "arialunicode",
+            "applegothic",
+        ]
+    elif has_kr and not has_jp:
+        keywords = [
+            "notosanscjk",
+            "notoserifcjk",
+            "notosanskr",
+            "applesdgothic",
+            "applegothic",
+            "arialunicode",
+        ]
+    else:
+        keywords = [
+            "notosanscjk",
+            "notoserifcjk",
+            "notosanskr",
+            "notosansjp",
+            "applesdgothic",
+            "applegothic",
+            "hiragino",
+            "arialunicode",
+        ]
+
+    for path in deduped_fonts:
+        normalized = Path(path).name.lower().replace(" ", "")
+        if any(keyword in normalized for keyword in keywords):
             return path
     return None
 
